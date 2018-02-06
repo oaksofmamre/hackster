@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import "./App.css";
 
-const DEFAULT_QUERY = "";
+const DEFAULT_QUERY = "javascript";
 const PATH_BASE = "https://hn.algolia.com/api/v1";
 const PATH_SEARCH = "/search";
 const PARAM_SEARCH = "query=";
 
-// const url = `${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${DEFAULT_QUERY}`;
-// console.log(url);
+const url = `${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${DEFAULT_QUERY}`;
+console.log(url);
 
 const title = "Hackster";
 /* const list = [
@@ -29,15 +29,15 @@ const title = "Hackster";
   }
 ]; */
 
-// const isSearched = searchTerm => item =>
-// item.title.toLowerCase().includes(searchTerm.toLowerCase());
-const isSearched = searchTerm => {
-  if (!searchTerm) {
-    return item => item.title;
-  } else {
-    return item => item.title.toLowerCase().includes(searchTerm.toLowerCase());
-  }
-};
+const isSearched = searchTerm => item =>
+  item.title.toLowerCase().includes(searchTerm.toLowerCase());
+// const isSearched = searchTerm => {
+//   if (!searchTerm) {
+//     return item => item.title;
+//   } else {
+//     return item => item.title.toLowerCase().includes(searchTerm.toLowerCase());
+//   }
+// };
 
 class App extends Component {
   constructor(props) {
@@ -72,8 +72,14 @@ class App extends Component {
   onDismiss(id) {
     //DC: filter takes a function. returns boolean. if true, then adds item to new array, else does not
     //DC: setting state triggers render
-    const updatedList = this.state.list.filter(item => item.objectID !== id);
-    this.setState({ list: updatedList });
+    // const updatedList = this.state.list.filter(item => item.objectID !== id);
+    const isNotId = item => item.objectID !== id;
+    const updatedHits = this.state.result.hits.filter(isNotId);
+    // this.setState({ list: updatedHits });
+    this.setState({
+      // result: Object.assign({}, this.state.result, { hits: updatedHits })
+      result: { ...this.state.result, hits: updatedHits }
+    });
   }
 
   onSearchChange(event) {
