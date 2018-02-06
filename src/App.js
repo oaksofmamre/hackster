@@ -6,8 +6,8 @@ const PATH_BASE = "https://hn.algolia.com/api/v1";
 const PATH_SEARCH = "/search";
 const PARAM_SEARCH = "query=";
 
-const url = `${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${DEFAULT_QUERY}`;
-console.log(url);
+// const url = `${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${DEFAULT_QUERY}`;
+// console.log(url);
 
 const title = "Hackster";
 /* const list = [
@@ -28,16 +28,9 @@ const title = "Hackster";
     objectID: 1
   }
 ]; */
-
-const isSearched = searchTerm => item =>
-  item.title.toLowerCase().includes(searchTerm.toLowerCase());
-// const isSearched = searchTerm => {
-//   if (!searchTerm) {
-//     return item => item.title;
-//   } else {
-//     return item => item.title.toLowerCase().includes(searchTerm.toLowerCase());
-//   }
-// };
+//DC: this client-side search is no longer used, in favor of server-side search to API
+// const isSearched = searchTerm => item =>
+//   item.title.toLowerCase().includes(searchTerm.toLowerCase());
 
 class App extends Component {
   constructor(props) {
@@ -50,6 +43,7 @@ class App extends Component {
     this.onSearchChange = this.onSearchChange.bind(this);
     this.setSearchTopStories = this.setSearchTopStories.bind(this);
     this.fetchSearchTopStories = this.fetchSearchTopStories.bind(this);
+    this.onSearchSubmit = this.onSearchSubmit.bind(this);
   }
 
   setSearchTopStories(result) {
@@ -61,6 +55,12 @@ class App extends Component {
       .then(response => response.json())
       .then(result => this.setSearchTopStories(result))
       .catch(e => e);
+  }
+
+  onSearchSubmit(event) {
+    const { searchTerm } = this.state;
+    this.fetchSearchTopStories(searchTerm);
+    event.preventDefault();
   }
 
   componentDidMount() {
@@ -85,23 +85,21 @@ class App extends Component {
 
   render() {
     const { searchTerm, result } = this.state;
-
-    //API call is async, thus
-    //if the data hasn't yet come back from API, then simply return null
-    // if (!result) {
-    //   return null;
-    // }
-
     return (
       <div className="App">
         <div>
           <h2>{title}</h2>
-          <Search value={searchTerm} onChange={this.onSearchChange} />
+          <Search
+            value={searchTerm}
+            onChange={this.onSearchChange}
+            onSubmit={this.onSearchSubmit}
+            children="Search"
+          />
         </div>
         {result && (
           <Table
             list={result.hits}
-            pattern={searchTerm}
+            /* pattern={searchTerm} */
             onDismiss={this.onDismiss}
           />
         )}
@@ -110,21 +108,23 @@ class App extends Component {
   }
 }
 
-const Search = ({ value, onChange, children = "" }) => (
-  <form>
-    {children}
+const Search = ({ value, onChange, onSubmit, children = "" }) => (
+  <form onSubmit={onSubmit}>
     <input
       type="text"
       value={value}
       placeholder="Type in your search"
       onChange={onChange}
     />
+    <button type="submit">{children}</button>
   </form>
 );
 
-const Table = ({ list, pattern, onDismiss }) => (
+// const Table = ({ list, pattern, onDismiss }) => (
+const Table = ({ list, onDismiss }) => (
   <div>
-    {list.filter(isSearched(pattern)).map(item => (
+    {/* {list.filter(isSearched(pattern)).map(item => ( */}
+    {list.map(item => (
       <div key={item.objectID}>
         <span>
           <a href={item.url}>{item.title}</a>
