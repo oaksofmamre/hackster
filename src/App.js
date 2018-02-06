@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 
-const DEFAULT_QUERY = "javascript";
+const DEFAULT_QUERY = "redux";
 const PATH_BASE = "https://hn.algolia.com/api/v1";
 const PATH_SEARCH = "/search";
 const PARAM_SEARCH = "query=";
@@ -43,7 +43,6 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // list,
       result: null,
       searchTerm: DEFAULT_QUERY
     };
@@ -72,10 +71,8 @@ class App extends Component {
   onDismiss(id) {
     //DC: filter takes a function. returns boolean. if true, then adds item to new array, else does not
     //DC: setting state triggers render
-    // const updatedList = this.state.list.filter(item => item.objectID !== id);
     const isNotId = item => item.objectID !== id;
     const updatedHits = this.state.result.hits.filter(isNotId);
-    // this.setState({ list: updatedHits });
     this.setState({
       // result: Object.assign({}, this.state.result, { hits: updatedHits })
       result: { ...this.state.result, hits: updatedHits }
@@ -87,12 +84,13 @@ class App extends Component {
   }
 
   render() {
-    // const { searchTerm, list } = this.state;
     const { searchTerm, result } = this.state;
 
-    if (!result) {
-      return null;
-    }
+    //API call is async, thus
+    //if the data hasn't yet come back from API, then simply return null
+    // if (!result) {
+    //   return null;
+    // }
 
     return (
       <div className="App">
@@ -100,12 +98,13 @@ class App extends Component {
           <h2>{title}</h2>
           <Search value={searchTerm} onChange={this.onSearchChange} />
         </div>
-        {/* <Table list={list} pattern={searchTerm} onDismiss={this.onDismiss} /> */}
-        <Table
-          list={result.hits}
-          pattern={searchTerm}
-          onDismiss={this.onDismiss}
-        />
+        {result && (
+          <Table
+            list={result.hits}
+            pattern={searchTerm}
+            onDismiss={this.onDismiss}
+          />
+        )}
       </div>
     );
   }
