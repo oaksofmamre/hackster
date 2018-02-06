@@ -37,6 +37,8 @@ class App extends Component {
   }
 
   onDismiss(id) {
+    //DC: filter takes a function. returns boolean. if true, then adds item to new array, else does not
+    //DC: setting state triggers render
     const updatedList = this.state.list.filter(item => item.objectID !== id);
     this.setState({ list: updatedList });
   }
@@ -49,57 +51,53 @@ class App extends Component {
     const { searchTerm, list } = this.state;
     return (
       <div className="App">
-        <h2>{title}</h2>
-        <Search value={searchTerm} onChange={this.onSearchChange} />
+        <div>
+          <h2>{title}</h2>
+          <Search value={searchTerm} onChange={this.onSearchChange} />
+        </div>
         <Table list={list} pattern={searchTerm} onDismiss={this.onDismiss} />
       </div>
     );
   }
 }
 
-function Search({ value, onChange, children }) {
-  return (
-    <form>
-      {children}
-      <input
-        type="text"
-        value={value}
-        placeholder="Type in your search"
-        onChange={onChange}
-      />
-    </form>
-  );
-}
+const Search = ({ value, onChange, children = "" }) => (
+  <form>
+    {children}
+    <input
+      type="text"
+      value={value}
+      placeholder="Type in your search"
+      onChange={onChange}
+    />
+  </form>
+);
 
-function Table({ list, pattern, onDismiss }) {
-  return (
-    <div>
-      {list.filter(isSearched(pattern)).map(item => (
-        <div key={item.objectID}>
-          <span>
-            <a href={item.url}>{item.title}</a>
-          </span>
-          <span> {item.author}</span>
-          <span> {item.num_comments}</span>
-          <span> {item.points} </span>
-          <span>
-            <Button onClick={() => onDismiss(item.objectID)}>Dismiss</Button>
-            {/* open up browser's console to see the different effects */}
-            {/* <Button onClick={console.log(item.objectID)}>Dismiss</Button> */}
-            {/* <Button onClick={() => console.log(item.objectID)}> Dismiss </Button> */}
-          </span>
-        </div>
-      ))}
-    </div>
-  );
-}
+const Table = ({ list, pattern, onDismiss }) => (
+  <div>
+    {list.filter(isSearched(pattern)).map(item => (
+      <div key={item.objectID} className="table-row">
+        <span>
+          <a href={item.url}>{item.title}</a>
+        </span>
+        <span> {item.author}</span>
+        <span> {item.num_comments}</span>
+        <span> {item.points} </span>
+        <span>
+          <Button onClick={() => onDismiss(item.objectID)}>Dismiss</Button>
+          {/* open up browser's console to see the different outcomes */}
+          {/* <Button onClick={console.log(item.objectID)}>Dismiss</Button> */}
+          {/* <Button onClick={() => console.log(item.objectID)}> Dismiss </Button> */}
+        </span>
+      </div>
+    ))}
+  </div>
+);
 
-function Button({ onClick, className = "", children }) {
-  return (
-    <button onClick={onClick} className={className} type="button">
-      {children}
-    </button>
-  );
-}
+const Button = ({ onClick, className = "", children }) => (
+  <button onClick={onClick} className={className} type="button">
+    {children}
+  </button>
+);
 
 export default App;
