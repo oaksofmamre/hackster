@@ -22,14 +22,6 @@ const title = "Hackster";
     num_comments: 111,
     points: 111,
     objectID: 0
-  },
-  {
-    title: "Mern: Build JavaScript apps using React and Redux",
-    url: "http://mern.io/",
-    author: "sinkensabe",
-    num_comments: 222,
-    points: 222,
-    objectID: 1
   }
 ]; */
 
@@ -38,7 +30,8 @@ class App extends Component {
     super(props);
     this.state = {
       result: null,
-      searchTerm: DEFAULT_QUERY
+      searchTerm: DEFAULT_QUERY,
+      error: null
     };
     this.onDismiss = this.onDismiss.bind(this);
     this.onSearchChange = this.onSearchChange.bind(this);
@@ -60,7 +53,7 @@ class App extends Component {
     )
       .then(response => response.json())
       .then(result => this.setSearchTopStories(result))
-      .catch(e => e);
+      .catch(e => this.setState({ error: e }));
   }
 
   onSearchSubmit(event) {
@@ -80,7 +73,6 @@ class App extends Component {
     const isNotId = item => item.objectID !== id;
     const updatedHits = this.state.result.hits.filter(isNotId);
     this.setState({
-      // result: Object.assign({}, this.state.result, { hits: updatedHits })
       result: { ...this.state.result, hits: updatedHits }
     });
   }
@@ -90,8 +82,9 @@ class App extends Component {
   }
 
   render() {
-    const { searchTerm, result } = this.state;
+    const { searchTerm, result, error } = this.state;
     const page = (result && result.page) || 0;
+
     return (
       <div className="App">
         <div>
@@ -103,12 +96,12 @@ class App extends Component {
             children="Search"
           />
         </div>
-        {result && (
-          <Table
-            list={result.hits}
-            /* pattern={searchTerm} */
-            onDismiss={this.onDismiss}
-          />
+        {error ? (
+          <div>
+            <p>Opps, something went wrong ...</p>
+          </div>
+        ) : (
+          result && <Table list={result.hits} onDismiss={this.onDismiss} />
         )}
         <Button
           onClick={() => this.fetchSearchTopStories(searchTerm, page + 1)}
@@ -132,10 +125,8 @@ const Search = ({ value, onChange, onSubmit, children = "" }) => (
   </form>
 );
 
-// const Table = ({ list, pattern, onDismiss }) => (
 const Table = ({ list, onDismiss }) => (
   <div>
-    {/* {list.filter(isSearched(pattern)).map(item => ( */}
     {list.map(item => (
       <div key={item.objectID}>
         <span>
