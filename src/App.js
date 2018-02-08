@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 
-const DEFAULT_QUERY = "redux";
+const DEFAULT_QUERY = "javascript";
 const DEFAULT_HITS_PER_PAGE = "10";
 
 const PATH_BASE = "https://hn.algolia.com/api/v1";
@@ -16,11 +16,11 @@ const PARAM_HITS_PER_PAGE = "hitsPerPage=";
 const title = "hackster";
 /* const list = [
   {
-    title: "Build Yourself a Redux",
-    url: "https://zapier.com/engineering/how-to-build-redux/",
-    author: "jdeal",
-    num_comments: 111,
-    points: 111,
+    title: "Yarn – A new package manager for JavaScript",
+    url: "https://code.facebook.com/posts/1840075619545360",
+    author: "cpojer",
+    num_comments: 469,
+    points: 1714,
     objectID: 0
   }
 ]; */
@@ -84,8 +84,11 @@ class App extends Component {
     const page = (result && result.page) || 0;
 
     return (
-      <div id="main-container" className="ui raised segment container">
-        <h2>{title}</h2>
+      <div id="main-container" class="ui raised segment container">
+        <h2 className="ui header">
+          <img src="./images/logo.png" class="ui circular image" alt="logo" />
+          {title}
+        </h2>
         <Search
           value={searchTerm}
           onChange={this.onSearchChange}
@@ -123,7 +126,7 @@ const Search = ({ value, onChange, onSubmit, children = "" }) => (
           />
         </div>
         <div id="search-area" class="column">
-          <button class="ui button tiny orange" type="submit">
+          <button class="ui button tiny basic orange" type="submit">
             {children}
           </button>
         </div>
@@ -134,14 +137,24 @@ const Search = ({ value, onChange, onSubmit, children = "" }) => (
 
 const Table = ({ list, onDismiss }) => (
   <div>
+    {/* DC: filter out blank stories here */}
     {list.map(item => (
       <div key={item.objectID}>
         <span>
           <a href={item.url}>{item.title}</a>
         </span>
-        <span> {item.author}</span>
-        <span> {item.num_comments}</span>
-        <span> {item.points} </span>
+        <span>
+          {" "}
+          by <u>{item.author}</u>
+        </span>
+        <span>
+          {" "}
+          with <u>{item.num_comments} comments</u>{" "}
+        </span>
+        <span>
+          {" "}
+          and <u>{item.points} points</u>
+        </span>
         <span>
           <TrashButton onClick={() => onDismiss(item.objectID)}>
             Dismiss
@@ -156,7 +169,7 @@ const Table = ({ list, onDismiss }) => (
 );
 
 const TrashButton = ({ onClick, className = "", children }) => (
-  <div class="ui mini basic icon buttons">
+  <div class="trash-button ui mini basic icon buttons">
     <button onClick={onClick} class="ui icon button">
       <i class="trash icon" />
     </button>

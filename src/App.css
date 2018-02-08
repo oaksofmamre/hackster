@@ -13,3 +13,7 @@
 #search-area {
   padding-left: 0;
 }
+
+div.trash-button.icon.buttons {
+  margin-left: 10px;
+}
