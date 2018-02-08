@@ -84,16 +84,14 @@ class App extends Component {
     const page = (result && result.page) || 0;
 
     return (
-      <div className="ui container">
-        <div>
-          <h2>{title}</h2>
-          <Search
-            value={searchTerm}
-            onChange={this.onSearchChange}
-            onSubmit={this.onSearchSubmit}
-            children="Search"
-          />
-        </div>
+      <div className="ui raised segment container">
+        <h2>{title}</h2>
+        <Search
+          value={searchTerm}
+          onChange={this.onSearchChange}
+          onSubmit={this.onSearchSubmit}
+          children="Search"
+        />
         {error ? (
           <div>
             <p>Opps, something went wrong ...</p>
@@ -102,6 +100,7 @@ class App extends Component {
           result && <Table list={result.hits} onDismiss={this.onDismiss} />
         )}
         <Button
+          className="ui button orange mini"
           onClick={() => this.fetchSearchTopStories(searchTerm, page + 1)}
         >
           More
@@ -112,14 +111,24 @@ class App extends Component {
 }
 
 const Search = ({ value, onChange, onSubmit, children = "" }) => (
-  <form onSubmit={onSubmit}>
-    <input
-      type="text"
-      value={value}
-      placeholder="Type in your search"
-      onChange={onChange}
-    />
-    <button type="submit">{children}</button>
+  <form class="ui form " onSubmit={onSubmit}>
+    <div className="ui grid">
+      <div class="five column row">
+        <div class="column">
+          <input
+            type="text"
+            value={value}
+            placeholder="Type in your search"
+            onChange={onChange}
+          />
+        </div>
+        <div class="column">
+          <button class="ui  button" type="submit">
+            {children}
+          </button>
+        </div>
+      </div>
+    </div>
   </form>
 );
 
@@ -134,13 +143,23 @@ const Table = ({ list, onDismiss }) => (
         <span> {item.num_comments}</span>
         <span> {item.points} </span>
         <span>
-          <Button onClick={() => onDismiss(item.objectID)}>Dismiss</Button>
+          <TrashButton onClick={() => onDismiss(item.objectID)}>
+            Dismiss
+          </TrashButton>
           {/* open up browser's console to see the different outcomes */}
           {/* <Button onClick={console.log(item.objectID)}>Dismiss</Button> */}
           {/* <Button onClick={() => console.log(item.objectID)}> Dismiss </Button> */}
         </span>
       </div>
     ))}
+  </div>
+);
+
+const TrashButton = ({ onClick, className = "", children }) => (
+  <div class="ui mini basic icon buttons">
+    <button onClick={onClick} class="ui icon button">
+      <i class="trash icon" />
+    </button>
   </div>
 );
 
