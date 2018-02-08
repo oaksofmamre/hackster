@@ -84,7 +84,7 @@ class App extends Component {
     const page = (result && result.page) || 0;
 
     return (
-      <div className="ui raised segment container">
+      <div id="main-container" className="ui raised segment container">
         <h2>{title}</h2>
         <Search
           value={searchTerm}
@@ -111,9 +111,9 @@ class App extends Component {
 }
 
 const Search = ({ value, onChange, onSubmit, children = "" }) => (
-  <form class="ui form " onSubmit={onSubmit}>
+  <form class="ui form tiny" onSubmit={onSubmit}>
     <div className="ui grid">
-      <div class="five column row">
+      <div id="search-box-area" class="five column row">
         <div class="column">
           <input
             type="text"
@@ -122,8 +122,8 @@ const Search = ({ value, onChange, onSubmit, children = "" }) => (
             onChange={onChange}
           />
         </div>
-        <div class="column">
-          <button class="ui  button" type="submit">
+        <div id="search-area" class="column">
+          <button class="ui button tiny orange" type="submit">
             {children}
           </button>
         </div>
@@ -164,7 +164,12 @@ const TrashButton = ({ onClick, className = "", children }) => (
 );
 
 const Button = ({ onClick, className = "", children }) => (
-  <button onClick={onClick} className={className} type="button">
+  <button
+    id="more-button"
+    onClick={onClick}
+    className={className}
+    type="button"
+  >
     {children}
   </button>
 );
