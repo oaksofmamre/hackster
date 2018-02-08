@@ -13,7 +13,7 @@ const PARAM_HITS_PER_PAGE = "hitsPerPage=";
 // const url = `${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${DEFAULT_QUERY}&${PARAM_PAGE}`;
 // console.log(url);
 
-const title = "Hackster";
+const title = "hackster";
 /* const list = [
   {
     title: "Build Yourself a Redux",
@@ -68,8 +68,6 @@ class App extends Component {
   }
 
   onDismiss(id) {
-    //DC: filter takes a function. returns boolean. if true, then adds item to new array, else does not
-    //DC: setting state triggers render
     const isNotId = item => item.objectID !== id;
     const updatedHits = this.state.result.hits.filter(isNotId);
     this.setState({
@@ -86,7 +84,7 @@ class App extends Component {
     const page = (result && result.page) || 0;
 
     return (
-      <div className="App">
+      <div className="ui container">
         <div>
           <h2>{title}</h2>
           <Search
