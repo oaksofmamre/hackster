@@ -145,15 +145,15 @@ const Table = ({ list, onDismiss }) => (
         </span>
         <span>
           {" "}
-          by <u>{item.author}</u>
+          ++ by <u>{item.author}</u>
         </span>
         <span>
           {" "}
-          with <u>{item.num_comments} comments</u>{" "}
+          | <u>{item.num_comments} comments</u>{" "}
         </span>
         <span>
           {" "}
-          and <u>{item.points} points</u>
+          | <u>{item.points} points</u>
         </span>
         <span>
           <TrashButton onClick={() => onDismiss(item.objectID)}>
