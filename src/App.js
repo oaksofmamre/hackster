@@ -137,8 +137,7 @@ const Search = ({ value, onChange, onSubmit, children = "" }) => (
 
 const Table = ({ list, onDismiss }) => (
   <div>
-    {/* DC: filter out blank stories here */}
-    {list.map(item => (
+    {list.filter(item => item.title).map(item => (
       <div key={item.objectID}>
         <span>
           <a href={item.url}>{item.title}</a>
