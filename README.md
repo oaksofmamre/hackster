@@ -29,7 +29,7 @@ localhost:3000
 ### Demo
 
 ```
-URL will be updated here
+https://hackster-fir.herokuapp.com/
 ```
 
 ## Highlights:
@@ -39,6 +39,6 @@ URL will be updated here
 * styled with Semantic UI
 * responsive website design
 
-by Dennis C
+#### by Dennis C
 
 :coffee:
