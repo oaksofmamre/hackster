@@ -84,9 +84,13 @@ class App extends Component {
     const page = (result && result.page) || 0;
 
     return (
-      <div id="main-container" class="ui raised segment container">
+      <div id="main-container" className="ui raised segment container">
         <h2 className="ui header">
-          <img src="./images/logo.png" class="ui circular image" alt="logo" />
+          <img
+            src="./images/logo.png"
+            className="ui circular image"
+            alt="logo"
+          />
           {title}
         </h2>
         <Search
@@ -114,10 +118,10 @@ class App extends Component {
 }
 
 const Search = ({ value, onChange, onSubmit, children = "" }) => (
-  <form class="ui form tiny" onSubmit={onSubmit}>
+  <form className="ui form tiny" onSubmit={onSubmit}>
     <div className="ui grid">
-      <div id="search-box-area" class="five column row">
-        <div class="column">
+      <div id="search-box-area" className="five column row">
+        <div className="column">
           <input
             type="text"
             value={value}
@@ -125,8 +129,8 @@ const Search = ({ value, onChange, onSubmit, children = "" }) => (
             onChange={onChange}
           />
         </div>
-        <div id="search-area" class="column">
-          <button class="ui button tiny basic orange" type="submit">
+        <div id="search-area" className="column">
+          <button className="ui button tiny basic orange" type="submit">
             {children}
           </button>
         </div>
@@ -168,9 +172,9 @@ const Table = ({ list, onDismiss }) => (
 );
 
 const TrashButton = ({ onClick, className = "", children }) => (
-  <div class="trash-button ui mini basic icon buttons">
-    <button onClick={onClick} class="ui icon button">
-      <i class="trash icon" />
+  <div className="trash-button ui mini basic icon buttons">
+    <button onClick={onClick} className="ui icon button">
+      <i className="trash icon" />
     </button>
   </div>
 );
