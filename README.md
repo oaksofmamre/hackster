@@ -28,17 +28,13 @@ localhost:3000
 
 ### Demo
 
-```
 https://hackster-fir.herokuapp.com/
-```
 
 ## Highlights:
 
 * hackster is a React app
-* JavaScript / HTML5 / CSS3
+* Node.js / HTML5 / CSS3
 * styled with Semantic UI
 * responsive website design
-
-#### by Dennis C
 
 :coffee:
