@@ -9,7 +9,7 @@ hackster is a news app using the Hacker News REST API. You can think of hackster
 Install the dependencies
 
 ```sh
-$ npm install
+$ yarn install
 ```
 
 ### Serve
@@ -17,13 +17,19 @@ $ npm install
 Start the server
 
 ```sh
-$ npm start
+$ yarn start
 ```
 
 Access from your browser:
 
 ```
 localhost:3000
+```
+
+### Test
+
+```sh
+$ yarn test
 ```
 
 ### Demo
@@ -33,8 +39,8 @@ https://hackster-fir.herokuapp.com/
 ## Highlights:
 
 * hackster is a React app
-* Node.js / HTML5 / CSS3
-* styled with Semantic UI
-* responsive website design
+* using Node.js / HTML5 / CSS3
+* styled using Semantic UI
+* and with responsive website design
 
 :coffee:

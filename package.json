@@ -15,6 +15,7 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
+    "react-test-renderer": "^16.2.0",
     "semantic-ui-css": "^2.2.14"
   }
 }
