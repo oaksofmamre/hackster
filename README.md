@@ -12,6 +12,12 @@ Install the dependencies
 $ yarn install
 ```
 
+### Test
+
+```sh
+$ yarn test
+```
+
 ### Serve
 
 Start the server
@@ -26,12 +32,6 @@ Access from your browser:
 localhost:3000
 ```
 
-### Test
-
-```sh
-$ yarn test
-```
-
 ### Demo
 
 https://hackster-fir.herokuapp.com/
@@ -41,6 +41,6 @@ https://hackster-fir.herokuapp.com/
 * hackster is a React app
 * using Node.js / HTML5 / CSS3
 * styled using Semantic UI
-* and with responsive website design
+* with responsive website design
 
 :coffee:
