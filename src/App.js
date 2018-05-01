@@ -14,20 +14,7 @@ const PARAM_SEARCH = "query=";
 const PARAM_PAGE = "page=";
 const PARAM_HITS_PER_PAGE = "hitsPerPage=";
 
-// const url = `${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${DEFAULT_QUERY}&${PARAM_PAGE}`;
-// console.log(url);
-
-const title = "hackster";
-/* const list = [
-  {
-    title: "Yarn – A new package manager for JavaScript",
-    url: "https://code.facebook.com/posts/1840075619545360",
-    author: "cpojer",
-    num_comments: 469,
-    points: 1714,
-    objectID: 0
-  }
-]; */
+const TITLE = "hackster";
 
 class App extends Component {
   constructor(props) {
@@ -95,7 +82,7 @@ class App extends Component {
             className="ui circular image"
             alt="logo"
           />
-          {title}
+          {TITLE}
         </h2>
         <Search
           value={searchTerm}
@@ -121,6 +108,6 @@ class App extends Component {
   }
 }
 
-export default App;
-
 export { Button, Search, Table };
+
+export default App;

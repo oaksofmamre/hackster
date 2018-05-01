@@ -2,7 +2,6 @@ import React from "react";
 import TrashButton from "../TrashButton/TrashButton";
 
 const table = props => (
-  // const table = ({ list, onDismiss }) => (
   <div>
     {props.list.filter(item => item.title).map(item => (
       <div key={item.objectID}>

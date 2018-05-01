@@ -1,7 +1,6 @@
 import React from "react";
 
 const search = props => (
-  // const search = ({ value, onChange, onSubmit, children = "" }) => (
   <form className="ui form tiny" onSubmit={props.onSubmit}>
     <div className="ui grid">
       <div id="search-box-area" className="five column row">
