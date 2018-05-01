@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 // import fetch from "isomorphic-fetch";
 import "./App.css";
+import Button from "./components/Button/Button";
+import Table from "./components/Table/Table";
+import Search from "./components/Search/Search";
 
 const DEFAULT_QUERY = "javascript";
 const DEFAULT_HITS_PER_PAGE = "10";
@@ -117,79 +120,6 @@ class App extends Component {
     );
   }
 }
-
-const Search = ({ value, onChange, onSubmit, children = "" }) => (
-  <form className="ui form tiny" onSubmit={onSubmit}>
-    <div className="ui grid">
-      <div id="search-box-area" className="five column row">
-        <div className="column">
-          <input
-            type="text"
-            value={value}
-            placeholder="Type in your search"
-            onChange={onChange}
-          />
-        </div>
-        <div id="search-area" className="column">
-          <button className="ui button tiny basic orange" type="submit">
-            {children}
-          </button>
-        </div>
-      </div>
-    </div>
-  </form>
-);
-
-const Table = ({ list, onDismiss }) => (
-  <div>
-    {list.filter(item => item.title).map(item => (
-      <div key={item.objectID}>
-        <span>
-          <a href={item.url}>{item.title}</a>
-        </span>
-        <span>
-          {" "}
-          ++ by <u>{item.author}</u>
-        </span>
-        <span>
-          {" "}
-          | <u>{item.num_comments} comments</u>{" "}
-        </span>
-        <span>
-          {" "}
-          | <u>{item.points} points</u>
-        </span>
-        <span>
-          <TrashButton onClick={() => onDismiss(item.objectID)}>
-            Dismiss
-          </TrashButton>
-          {/* open up browser's console to see the different outcomes */}
-          {/* <Button onClick={console.log(item.objectID)}>Dismiss</Button> */}
-          {/* <Button onClick={() => console.log(item.objectID)}> Dismiss </Button> */}
-        </span>
-      </div>
-    ))}
-  </div>
-);
-
-const TrashButton = ({ onClick, className = "", children }) => (
-  <div className="trash-button ui mini basic icon buttons">
-    <button onClick={onClick} className="ui icon button">
-      <i className="trash icon" />
-    </button>
-  </div>
-);
-
-const Button = ({ onClick, className = "", children }) => (
-  <button
-    id="more-button"
-    onClick={onClick}
-    className={className}
-    type="button"
-  >
-    {children}
-  </button>
-);
 
 export default App;
 
