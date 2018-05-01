@@ -18,6 +18,20 @@ describe("App component", () => {
   });
 });
 
+describe("Hackster component", () => {
+  it("renders without crashing", () => {
+    const div = document.createElement("div");
+    ReactDOM.render(<Hackster />, div);
+    ReactDOM.unmountComponentAtNode(div);
+  });
+
+  test("has valid snapshot", () => {
+    const component = renderer.create(<App />);
+    let tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+});
+
 describe("Search component", () => {
   it("renders without crashing", () => {
     const div = document.createElement("div");
