@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App, { Search, Button } from "./App";
+import App from "./App";
+import Hackster, { Search, Button } from "./containers/Hackster/Hackster";
 import renderer from "react-test-renderer";
 
 describe("App component", () => {
