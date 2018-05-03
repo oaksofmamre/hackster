@@ -24,9 +24,6 @@ const table = props => (
           <TrashButton onClick={() => props.onDismiss(item.objectID)}>
             Dismiss
           </TrashButton>
-          {/* open up browser's console to see the different outcomes */}
-          {/* <Button onClick={console.log(item.objectID)}>Dismiss</Button> */}
-          {/* <Button onClick={() => console.log(item.objectID)}> Dismiss </Button> */}
         </span>
       </div>
     ))}

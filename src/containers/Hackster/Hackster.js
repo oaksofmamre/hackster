@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-
 import Button from "../../components/Button/Button";
 import Table from "../../components/Table/Table";
 import Search from "../../components/Search/Search";
 
 // import fetch from "isomorphic-fetch";
 
+const TITLE = "hackster";
 const DEFAULT_QUERY = "javascript";
 const DEFAULT_HITS_PER_PAGE = "10";
 
@@ -14,8 +14,6 @@ const PATH_SEARCH = "/search";
 const PARAM_SEARCH = "query=";
 const PARAM_PAGE = "page=";
 const PARAM_HITS_PER_PAGE = "hitsPerPage=";
-
-const TITLE = "hackster";
 
 class Hackster extends Component {
   constructor(props) {
@@ -89,8 +87,9 @@ class Hackster extends Component {
           value={searchTerm}
           onChange={this.onSearchChange}
           onSubmit={this.onSearchSubmit}
-          children="Search"
-        />
+        >
+          Search
+        </Search>
         {error ? (
           <div>
             <p>Opps, something went wrong ...</p>
@@ -109,6 +108,5 @@ class Hackster extends Component {
   }
 }
 
-export { Button, Search, Table };
-
 export default Hackster;
+export { Button, Search, Table };
